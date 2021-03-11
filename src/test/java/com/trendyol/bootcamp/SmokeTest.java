@@ -11,6 +11,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertEquals;
@@ -47,7 +48,7 @@ public class SmokeTest {
         options.addArguments("--disable-notifications");
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
 
-        System.setProperty("webdriver.chrome.driver", "/Users/taylan.derinbay/Downloads/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "\\Users\\fatma\\Downloads\\Compressed/chromedriver.exe");
         webDriver = new ChromeDriver(options);
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         webDriver.get("https://www.trendyol.com");
@@ -77,8 +78,8 @@ public class SmokeTest {
     @Test
     public void shouldLogin() {
         webDriver.findElement(By.className("account-user")).click();
-        webDriver.findElement(By.id("login-email")).sendKeys("uatbuyer21@mailinator.com");
-        webDriver.findElement(By.id("login-password-input")).sendKeys("1234qwe");
+        webDriver.findElement(By.id("login-email")).sendKeys("enesberke2@gmail.com");
+        webDriver.findElement(By.id("login-password-input")).sendKeys("Asdasd123");
         webDriver.findElement(By.className("submit")).click();
 
         WebDriverWait wait = new WebDriverWait(webDriver, 10);
@@ -87,6 +88,27 @@ public class SmokeTest {
         String accountButtonText = webDriver.findElement(By.className("account-user")).getText();
         assertEquals(accountButtonText, "Hesabım");
     }
+    
+    @Test
+    public void shouldFindCost() {
+        webDriver.findElement(By.id("topBanner")).click();
+        webDriver.findElement(By.className("account-favorites")).click();
+        String welcomeText = webDriver.findElement(By.cssSelector("#login-register > div >h1")).getText();
+
+        assertEquals(welcomeText.toLowerCase(Locale.ROOT) , "merhaba,");
+
+    }
+
+    @Test
+    public void shouldThereIsLoginWord(){
+        webDriver.findElement(By.id("topBanner")).click();
+        webDriver.findElement(By.className("account-favorites")).click();
+        String welcomeText = webDriver.findElement(By.cssSelector("#login-register > div >h3")).getText().toLowerCase(Locale.ROOT);
+
+        welcomeText.contains("giriş yap");
+
+    }
+
 
     @AfterMethod
     public void tearDown() {
