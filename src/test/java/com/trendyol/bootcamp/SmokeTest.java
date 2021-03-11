@@ -5,12 +5,14 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.awt.*;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -104,9 +106,9 @@ public class SmokeTest {
         webDriver.findElement(By.id("topBanner")).click();
         webDriver.findElement(By.className("account-favorites")).click();
         String welcomeText = webDriver.findElement(By.cssSelector("#login-register > div >h3")).getText().toLowerCase(Locale.ROOT);
-
-        welcomeText.contains("giriş yap");
-
+        //System.out.println(welcomeText);
+        boolean mustbetrue = welcomeText.contains("giriş yap");
+        //System.out.println(mustbetrue);
     }
 
 
